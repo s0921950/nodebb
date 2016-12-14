@@ -26,6 +26,7 @@ apiController.getConfig = function (req, res, next) {
 	config.browserTitle = validator.escape(String(meta.config.browserTitle || meta.config.title || 'NodeBB'));
 	config.titleLayout = (meta.config.titleLayout || '{pageTitle} | {browserTitle}').replace(/{/g, '&#123;').replace(/}/g, '&#125;');
 	config.showSiteTitle = parseInt(meta.config.showSiteTitle, 10) === 1;
+	config.deleteTopic = parseInt(meta.config.deleteTopic, 10) === 1;
 	config.minimumTitleLength = meta.config.minimumTitleLength;
 	config.maximumTitleLength = meta.config.maximumTitleLength;
 	config.minimumPostLength = meta.config.minimumPostLength;
