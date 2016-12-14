@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals define, app, ajaxify, socket, bootbox, templates */
+/* globals define, app, ajaxify, socket, bootbox, templates, config */
 
 define('forum/topic/threadTools', [
 	'forum/topic/fork',
@@ -19,7 +19,11 @@ define('forum/topic/threadTools', [
 		var topicContainer = $('.topic');
 
 		topicContainer.on('click', '[component="topic/delete"]', function () {
-			topicCommand('delete', tid);
+			if(config.deleteTopic){
+				topicCommand('purge', tid);
+			} else {
+				topicCommand('delete', tid);
+			}
 			return false;
 		});
 

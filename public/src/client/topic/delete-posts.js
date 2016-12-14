@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals define, app, ajaxify, socket */
+/* globals define, app, ajaxify, socket, config */
 
 define('forum/topic/delete-posts', ['components', 'postSelect'], function (components, postSelect) {
 
@@ -37,7 +37,11 @@ define('forum/topic/delete-posts', ['components', 'postSelect'], function (compo
 			showPostsSelected();
 
 			deleteBtn.on('click', function () {
-				deletePosts(deleteBtn, 'posts.deletePosts');
+				if(config.deleteTopic){
+					deletePosts(deleteBtn, 'posts.purgePosts');
+				} else {
+					deletePosts(deleteBtn, 'posts.deletePosts');
+				}
 			});
 			purgeBtn.on('click', function () {
 				deletePosts(purgeBtn, 'posts.purgePosts');

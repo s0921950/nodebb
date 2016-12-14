@@ -191,9 +191,18 @@ define('forum/topic/postTools', ['share', 'navigator', 'components', 'translator
 			var btn = $(this);
 			var timestamp = parseInt(getData(btn, 'data-timestamp'), 10);
 			var postDeleteDuration = parseInt(ajaxify.data.postDeleteDuration, 10);
-			if (checkDuration(postDeleteDuration, timestamp, 'post-delete-duration-expired')) {
+			var $this = $(this);
+			var postEl = $this.parents('[data-pid]');
+			var index = parseInt(postEl.attr('data-index'), 10);
+			if(config.deleteTopic && index == 0){
+				topicCommand('purge', tid);
+			} else if(config.deleteTopic){
+				purgePost($(this), tid);
+			} else if(checkDuration(postDeleteDuration, timestamp, 'post-delete-duration-expired')) {
 				togglePostDelete($(this), tid);
+
 			}
+
 		});
 
 		function checkDuration(duration, postTimestamp, languageKey) {
@@ -424,6 +433,22 @@ define('forum/topic/postTools', ['share', 'navigator', 'components', 'translator
 		var action = !postEl.hasClass('deleted') ? 'delete' : 'restore';
 
 		postAction(action, pid, tid);
+	}
+
+	function topicCommand(command, tid) {
+		translator.translate('[[topic:thread_tools.' + command + '_confirm]]', function(msg) {
+			bootbox.confirm(msg, function(confirm) {
+				if (!confirm) {
+					return;
+				}
+
+				socket.emit('topics.' + command, {tids: [tid], cid: ajaxify.data.cid}, function(err) {
+					if (err) {
+						app.alertError(err.message);
+					}
+				});
+			});
+		});
 	}
 
 	function purgePost(button, tid) {

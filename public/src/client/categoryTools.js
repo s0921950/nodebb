@@ -1,7 +1,7 @@
 
 'use strict';
 
-/* globals define, app, socket, bootbox, ajaxify */
+/* globals define, app, socket, bootbox, ajaxify, config */
 
 
 define('forum/categoryTools', ['forum/topic/move', 'topicSelect', 'components', 'translator'], function (move, topicSelect, components, translator) {
@@ -14,7 +14,11 @@ define('forum/categoryTools', ['forum/topic/move', 'topicSelect', 'components', 
 		topicSelect.init(updateDropdownOptions);
 
 		components.get('topic/delete').on('click', function () {
-			categoryCommand('delete', topicSelect.getSelectedTids());
+			if(config.deleteTopic){
+				categoryCommand('purge', topicSelect.getSelectedTids());
+			} else {
+				categoryCommand('delete', topicSelect.getSelectedTids());
+			}
 			return false;
 		});
 
