@@ -28,6 +28,12 @@
 	<div class="col-sm-2 col-xs-12 settings-header">Posting Restrictions</div>
 	<div class="col-sm-10 col-xs-12">
 		<form>
+			<div class="checkbox">
+				<label for="deleteTopic" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+					<input type="checkbox" class="mdl-switch__input" id="deleteTopic" data-field="deleteTopic" name="deleteTopic" />
+					<span class="mdl-switch__label">Delete topic or post directly</span>
+				</label>
+			</div>
 			<div class="form-group">
 				<label for="postDelay">Seconds between Posts</label>
 				<input id="postDelay" type="text" class="form-control" value="10" data-field="postDelay">
