@@ -91,7 +91,7 @@
     "nodebb-widget-ns-stats": "1.0.3",
     "nodebb-rewards-essentials": "0.0.9",
     "nodebb-theme-lavender": "3.0.15",
-    "nodebb-theme-persona": "git+ssh://git@10.134.98.13/opt/git/nodebb-theme-persona.git#mongodb-1.4.0",
+    "nodebb-theme-persona": "git+ssh://git@10.134.98.13/opt/git/nodebb-theme-persona.git#t4.1.94",
     "nodebb-theme-vanilla": "5.1.56",
     "nodebb-widget-essentials": "2.0.13",
     "nodemailer": "2.6.4",
