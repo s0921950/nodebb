@@ -15,6 +15,10 @@ var widgets = require('../widgets');
 var translator = require('../../public/src/modules/translator');
 var accountHelpers = require('../controllers/accounts/helpers');
 
+var MongoClient = require('mongodb').MongoClient;
+var Db = require('mongodb').Db;
+var Server = require('mongodb').Server;
+
 var apiController = {};
 
 apiController.getConfig = function (req, res, next) {
@@ -329,6 +333,141 @@ apiController.getRecentPosts = function (req, res, next) {
 		}
 
 		res.json(data);
+	});
+};
+
+apiController.mongodbInitialDb = function (req, res, next) {
+	var adminName, adminPassword, username, password, address, port;
+	meta.settings.get('terminal', function(err, settings) {
+		var db = new Db(req.query.username, new Server(address, port));
+		db.open(function (err, db) {
+			if (err) throw err;
+
+			// Use the admin database for the operation
+			var adminDb = db.admin();
+
+			adminDb.authenticate(adminName, adminPassword, function (err, result) {
+				db.addUser(username, password,
+				{
+			        roles: [
+			            "dbOwner"
+			        ]
+			    },
+			    function (err, result) {
+				});
+			});
+		});
+	});
+};
+
+apiController.mongodbRemoveDb = function (req, res, next) {
+	var username, password, address, port;
+	meta.settings.get('terminal', function(err, settings) {
+		var db = new Db(req.query.username, new Server(address, port));
+		// Establish connection to db
+		db.open(function(err, db) {
+			if (err) throw err;
+
+			// Use the admin database for the operation
+			var adminDb = db.admin();
+
+			adminDb.authenticate(username, password, function (err, result) {
+				db.dropDatabase(function(err, result) {
+					if (err) throw err;
+				});
+			});
+		});
+	});
+};
+
+apiController.mongodbInsert = function (req, res, next) {
+	var username, password, address, port;
+	meta.settings.get('terminal', function(err, settings) {
+		address = settings.address;
+		port = settings.port;
+		username = settings.username;
+		password = settings.password;
+		var url = 'mongodb://' + username + ':' + password + '@' + address + ':' + port + '/' + req.query.uid;
+		var collectionName = req.query.collectionName;
+		MongoClient.connect(url, function(err, db) {
+			if (err) throw err;
+			var collection = db.collection(collectionName);
+			collection.insert(JSON.parse(req.query.doc));
+			res.json({'result': 'WriteResult({ "nInserted" : 1 })'});
+		});
+	});
+};
+
+apiController.mongodbRemove = function (req, res, next) {
+	var username, password, address, port;
+	meta.settings.get('terminal', function(err, settings) {
+		address = settings.address;
+		port = settings.port;
+		username = settings.username;
+		password = settings.password;
+		var url = 'mongodb://' + username + ':' + password + '@' + address + ':' + port + '/' + req.query.uid;
+		var collectionName = req.query.collectionName;
+		MongoClient.connect(url, function(err, db) {
+			if (err) throw err;
+			var collection = db.collection(collectionName);
+			collection.remove(JSON.parse(req.query.doc));
+			res.json({'result': 'WriteResult({ "nRemoved" : 1 })'});
+		});
+	});
+};
+
+apiController.mongodbUpdate = function (req, res, next) {
+	var username, password, address, port;
+	meta.settings.get('terminal', function(err, settings) {
+		address = settings.address;
+		port = settings.port;
+		username = settings.username;
+		password = settings.password;
+		var url = 'mongodb://' + username + ':' + password + '@' + address + ':' + port + '/' + req.query.uid;
+		var collectionName = req.query.collectionName;
+		MongoClient.connect(url, function(err, db) {
+			if (err) throw err;
+			var collection = db.collection(collectionName);
+			collection.update(JSON.parse(req.query.query), JSON.parse(req.query.doc));
+			res.json({'result': 'WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })'});
+		});
+	});
+};
+
+apiController.mongodbFind = function (req, res, next) {
+	var username, password, address, port;
+	meta.settings.get('terminal', function(err, settings) {
+		address = settings.address;
+		port = settings.port;
+		username = settings.username;
+		password = settings.password;
+		var url = 'mongodb://' + username + ':' + password + '@' + address + ':' + port + '/' + req.query.uid;
+		var collectionName = req.query.collectionName;
+		MongoClient.connect(url, function(err, db) {
+			if (err) throw err;
+			var collection = db.collection(collectionName);
+			collection.find(JSON.parse(req.query.query)).toArray(function(err, docs) {
+				res.json(docs);
+			});
+		});
+	});
+};
+
+apiController.mongodbShowCol = function (req, res, next) {
+	var username, password, address, port;
+	meta.settings.get('terminal', function(err, settings) {
+		address = settings.address;
+		port = settings.port;
+		username = settings.username;
+		password = settings.password;
+		var url = 'mongodb://' + username + ':' + password + '@' + address + ':' + port + '/' + req.query.uid;
+		var collectionName = req.query.collectionName;
+		MongoClient.connect(url, function(err, db) {
+			if (err) throw err;
+			db.listCollections().toArray(function(err, items) {
+				res.json(items);
+			});
+		});
 	});
 };
 

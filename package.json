@@ -86,6 +86,7 @@
     "nodebb-plugin-spam-be-gone": "0.4.10",
     "nodebb-plugin-sso-facebook": "2.1.0",
     "nodebb-plugin-sso-twitter": "2.2.1",
+    "nodebb-plugin-terminal": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-terminal.git",
     "nodebb-plugin-write-api": "4.5.1",
     "nodebb-widget-ns-birthdays": "1.0.1",
     "nodebb-widget-ns-stats": "1.0.3",

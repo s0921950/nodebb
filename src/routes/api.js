@@ -17,6 +17,12 @@ module.exports =  function (app, middleware, controllers) {
 	router.get('/user/username/:username', middleware.checkGlobalPrivacySettings, controllers.api.getUserByUsername);
 	router.get('/user/email/:email', middleware.checkGlobalPrivacySettings, controllers.api.getUserByEmail);
 
+	router.get('/terminal/insert', middleware.checkGlobalPrivacySettings, controllers.api.mongodbInsert);
+	router.get('/terminal/remove', middleware.checkGlobalPrivacySettings, controllers.api.mongodbRemove);
+	router.get('/terminal/update', middleware.checkGlobalPrivacySettings, controllers.api.mongodbUpdate);
+	router.get('/terminal/find', middleware.checkGlobalPrivacySettings, controllers.api.mongodbFind);
+	router.get('/terminal/showCol', middleware.checkGlobalPrivacySettings, controllers.api.mongodbShowCol);
+
 	router.get('/:type/pid/:id', controllers.api.getObject);
 	router.get('/:type/tid/:id', controllers.api.getObject);
 	router.get('/:type/cid/:id', controllers.api.getObject);
