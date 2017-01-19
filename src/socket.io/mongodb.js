@@ -53,7 +53,7 @@ SocketMongodb.removeDb = function (socket, database, callback) {
 			// Use the admin database for the operation
 			var adminDb = db.admin();
 
-			adminDb.authenticate(username, password, function (err, result) {
+			db.authenticate(username, password, function (err, result) {
 				db.dropDatabase(function(err, result) {
 				});
 			});
