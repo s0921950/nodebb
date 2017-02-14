@@ -31,8 +31,7 @@ Analytics.increment = function (keys) {
 
 Analytics.pageView = function (payload) {
 	++pageViews;
-
-	if (payload.ip) {
+	if (ValidateIPaddress(payload.ip)) {
 		db.sortedSetScore('ip:recent', payload.ip, function (err, score) {
 			if (err) {
 				return;
@@ -55,6 +54,15 @@ Analytics.pageView = function (payload) {
 
 		if (cid) {
 			Analytics.increment(['pageviews:byCid:' + cid]);
+		}
+	}
+
+	function ValidateIPaddress(inputText){
+		var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+		if (inputText.match(ipformat)) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 };
