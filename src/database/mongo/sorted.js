@@ -796,4 +796,20 @@ module.exports = function (db, module) {
 		});
 	}
 
+	module.addCountLogin = function (key, score, value, callback) {
+		callback = callback || helpers.noop;
+		if (!key) {
+			return callback();
+		}
+		if (Array.isArray(score) && Array.isArray(value)) {
+			return sortedSetAddBulk(key, score, value, callback);
+		}
+
+		db.collection('objects').update({_key: key, value: value}, {$set: {score: parseInt(score, 10)}}, {upsert:true, w: 1}, function (err) {
+			if (err && err.message.startsWith('E11000 duplicate key error')) {
+				return process.nextTick(module.sortedSetAdd, key, score, value, callback);
+			}
+			callback(err);
+		});
+	};
 };
