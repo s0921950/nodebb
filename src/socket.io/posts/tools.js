@@ -52,8 +52,10 @@ module.exports = function (SocketPosts) {
 			results.posts.selfPost = socket.uid && socket.uid === parseInt(results.posts.uid, 10);
 			results.posts.display_edit_tools = results.canEdit.flag;
 			results.posts.display_delete_tools = results.canDelete.flag;
-			results.posts.display_moderator_tools = results.posts.display_edit_tools || results.posts.display_delete_tools;
+			// results.posts.display_moderator_tools = results.posts.display_edit_tools || results.posts.display_delete_tools;
+			results.posts.display_moderator_tools = true;
 			results.posts.display_move_tools = results.isAdminOrMod;
+
 			callback(null, results);
 		});
 	};
