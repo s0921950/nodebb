@@ -49,7 +49,7 @@ module.exports = function (Posts) {
 						if (err) {
 							return next(err);
 						}
-						Posts.parsePost(postData, next);
+						Posts.parsePost(postData, uid, next);
 					});
 				}
 			}

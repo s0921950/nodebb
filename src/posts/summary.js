@@ -90,6 +90,7 @@ module.exports = function (Posts) {
 	};
 
 	function parsePosts(posts, options, callback) {
+		var uid = 0;
 		async.map(posts, function (post, next) {
 			if (!post.content || !options.parse) {
 				if (options.stripTags) {
@@ -99,7 +100,7 @@ module.exports = function (Posts) {
 				return next(null, post);
 			}
 
-			Posts.parsePost(post, function (err, post) {
+			Posts.parsePost(post, uid, function (err, post) {
 				if (err) {
 					return next(err);
 				}

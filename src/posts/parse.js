@@ -14,7 +14,7 @@ var urlRegex = /href="([^"]+)"/g;
 
 module.exports = function (Posts) {
 
-	Posts.parsePost = function (postData, callback) {
+	Posts.parsePost = function (postData, uid, callback) {
 		postData.content = postData.content || '';
 
 		if (postData.pid && cache.has(String(postData.pid))) {
@@ -27,7 +27,7 @@ module.exports = function (Posts) {
 			postData.content = postData.content.toString();
 		}
 
-		plugins.fireHook('filter:parse.post', {postData: postData}, function (err, data) {
+		plugins.fireHook('filter:parse.post', {postData: postData, uid: uid}, function (err, data) {
 			if (err) {
 				return callback(err);
 			}

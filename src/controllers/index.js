@@ -171,7 +171,7 @@ Controllers.register = function (req, res, next) {
 			}
 		},
 		function (next) {
-			plugins.fireHook('filter:parse.post', {postData: {content: meta.config.termsOfUse || ''}}, next);
+			plugins.fireHook('filter:parse.post', {postData: {content: meta.config.termsOfUse || ''}, uid: 0}, next);
 		}
 	], function (err, termsOfUse) {
 		if (err) {

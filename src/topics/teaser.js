@@ -77,7 +77,7 @@ module.exports = function (Topics) {
 					post.user = users[post.uid];
 					post.timestampISO = utils.toISOString(post.timestamp);
 					tidToPost[post.tid] = post;
-					posts.parsePost(post, next);
+					posts.parsePost(post, 0, next);
 				}, next);
 			},
 			function (next) {

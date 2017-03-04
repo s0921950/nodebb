@@ -98,7 +98,7 @@ SocketHelpers.sendNotificationToPostOwner = function (pid, fromuid, command, not
 			async.parallel({
 				username: async.apply(user.getUserField, fromuid, 'username'),
 				topicTitle: async.apply(topics.getTopicField, postData.tid, 'title'),
-				postObj: async.apply(posts.parsePost, postData)
+				postObj: async.apply(posts.parsePost, postData, postData.uid)
 			}, next);
 		},
 		function (results, next) {

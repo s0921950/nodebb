@@ -71,7 +71,7 @@ module.exports = function (Posts) {
 				cache.del(String(postData.pid));
 				pubsub.publish('post:edit', String(postData.pid));
 
-				Posts.parsePost(postData, next);
+				Posts.parsePost(postData, data.uid, next);
 			},
 			function (postData, next) {
 				results.post = postData;

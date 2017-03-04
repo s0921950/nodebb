@@ -69,7 +69,7 @@ module.exports = function (SocketPosts) {
 			function (next) {
 				async.parallel({
 					post: function (next) {
-						posts.parsePost(post, next);
+						posts.parsePost(post, socket.uid, next);
 					},
 					admins: function (next) {
 						groups.getMembers('administrators', 0, -1, next);

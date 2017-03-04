@@ -62,7 +62,7 @@ var plugins = require('./plugins');
 					post.votes = post.upvotes - post.downvotes;
 					post.timestampISO = utils.toISOString(post.timestamp);
 					post.editedISO = parseInt(post.edited, 10) !== 0 ? utils.toISOString(post.edited) : '';
-					Posts.parsePost(post, next);
+					Posts.parsePost(post, uid, next);
 				}, next);
 			},
 			function (posts, next) {

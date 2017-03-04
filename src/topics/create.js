@@ -298,7 +298,7 @@ module.exports = function (Topics) {
 						Topics.addParentPosts([postData], next);
 					},
 					content: function (next) {
-						posts.parsePost(postData, next);
+						posts.parsePost(postData, uid, next);
 					}
 				}, next);
 			},
