@@ -52,7 +52,7 @@
     "morgan": "^1.3.2",
     "mousetrap": "^1.5.3",
     "nconf": "~0.8.2",
-    "nodebb-plugin-analytics": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-analytics.git#v0.3.0",
+    "nodebb-plugin-analytics": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-analytics.git#v0.4.0",
     "nodebb-plugin-composer-default": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-composer-default.git#v4.3.0",
     "nodebb-plugin-custom-homepg": "0.1.18",
     "nodebb-plugin-dbsearch": "1.0.4",
