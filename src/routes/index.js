@@ -116,6 +116,7 @@ module.exports = function (app, middleware, hotswapIds) {
 	app.all(relativePath + '(/api/admin|/api/admin/*?)', middleware.isAdmin);
 	app.all(relativePath + '(/admin|/admin/*?)', ensureLoggedIn.ensureLoggedIn(nconf.get('relative_path') + '/login?local=1'), middleware.applyCSRF, middleware.isAdmin);
 	app.all(relativePath + '(/groups)', ensureLoggedIn.ensureLoggedIn(nconf.get('relative_path') + '/login?local=1'), middleware.applyCSRF, middleware.isAdmin);
+	app.all(relativePath + '(/users)', ensureLoggedIn.ensureLoggedIn(nconf.get('relative_path') + '/login?local=1'), middleware.applyCSRF, middleware.isAdmin);
 
 	app.use(middleware.maintenanceMode);
 
