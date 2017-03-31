@@ -60,7 +60,7 @@
     "nodebb-plugin-emoji-extended": "1.1.1",
     "nodebb-plugin-emoji-one": "1.1.5",
     "nodebb-plugin-fsc-composer-redactor": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-fsc-composer-redactor#t0.2.0",
-    "nodebb-plugin-fsc-hide-posts": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-fsc-hide-posts#t0.6.0",
+    "nodebb-plugin-fsc-hide-posts": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-fsc-hide-posts#t0.7.0",
     "nodebb-plugin-fsc-question-and-answer": "git+ssh://git@10.134.98.13/opt/git/nodebb-plugin-fsc-question-and-answer#t0.1.0",
     "nodebb-plugin-google-analytics": "0.5.9",
     "nodebb-plugin-google-forms": "0.0.4",
