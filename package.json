@@ -60,6 +60,7 @@
     "nodebb-plugin-emoji-one": "1.1.5",
     "nodebb-plugin-fsc-analytics": "git+ssh://git@10.134.150.205/NodeBB/nodebb-plugin-fsc-analytics.git#v0.8.0",
     "nodebb-plugin-fsc-composer-redactor": "git+ssh://git@10.134.150.205/NodeBB/nodebb-plugin-fsc-composer-redactor#t0.2.0",
+    "nodebb-plugin-fsc-dbsearch": "git+ssh://git@10.134.150.205/NodeBB/nodebb-plugin-fsc-dbsearch#t1.0.5",
     "nodebb-plugin-fsc-hide-posts": "git+ssh://git@10.134.150.205/NodeBB/nodebb-plugin-fsc-hide-posts#t0.7.0",
     "nodebb-plugin-fsc-ignored-all-categories": "git+ssh://git@10.134.150.205/NodeBB/nodebb-plugin-fsc-ignored-all-categories.git",
     "nodebb-plugin-fsc-login": "git+ssh://git@10.134.150.205/NodeBB/nodebb-plugin-fsc-login.git#v0.3.0",
