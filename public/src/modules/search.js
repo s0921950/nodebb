@@ -71,7 +71,7 @@ define('search', ['navigator', 'translator'], function (nav, translator) {
 		if (data.showAs) {
 			query.showAs = data.showAs;
 		}
-		return decodeURIComponent($.param(query));
+		return $.param(query);
 	}
 
 	Search.getSearchPreferences = function () {
